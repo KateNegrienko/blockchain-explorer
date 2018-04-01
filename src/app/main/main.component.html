@@ -13,7 +13,6 @@
 
 </form>
 
-
 <div fxLayout="row" fxLayoutAlign="start center">
     <h3 fxFlex>Latest blocks</h3>
     <button mat-button color="accent" class="button" (click)="showBlocks()">See more</button>
@@ -29,5 +28,5 @@
 
 <div *ngIf="lineChartData" class="chart">
     <canvas baseChart width="500" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-        [colors]="lineChartColors" chartType="line" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        [colors]="lineChartColors" chartType="line" (chartHover)="chartHovered($event)"></canvas>
 </div>
