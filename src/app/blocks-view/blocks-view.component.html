@@ -18,8 +18,8 @@
     <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef class="details-row"> </mat-header-cell>
         <mat-cell *matCellDef="let element" class="details-row">
-            <button mat-icon-button >
-                <mat-icon aria-label="go to details" (click)="gotoBlock(element.hash)">description</mat-icon>
+            <button mat-icon-button (click)="gotoBlock(element.hash)">
+                <mat-icon aria-label="go to details" >description</mat-icon>
             </button>
         </mat-cell>
     </ng-container>
