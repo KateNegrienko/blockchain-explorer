@@ -1,0 +1,110 @@
+<div *ngIf="!loading && block">
+
+    <h3 fxFlex>Block #{{block.height}}</h3>
+    <mat-accordion>
+
+        <mat-expansion-panel (opened)="panelOpenStateSummary = true" (closed)="panelOpenStateSummary = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Summary
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Height</h5>
+                <p class="description">
+                    {{block.height}}
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Number Of Transactions</h5>
+                <p class="description">
+                    {{block.n_tx}}
+                </p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Bits</h5>
+                <p class="description">
+                    {{block.bits}}
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Size</h5>
+                <p class="description">
+                    {{block.size}}
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Output Total</h5>
+                <p class="description">
+                    {{ outputTotal() / 100000000}} BTC
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Transaction Fees</h5>
+                <p class="description">
+                    {{block.fee / 100000000}} BTC
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Nonce</h5>
+                <p class="description">
+                    {{block.nonce}}
+
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Received Time</h5>
+                <p class="description">
+                    {{block.received_time  | transformDate : 'dd MMM yyyy HH:mm'}}
+
+                </p>
+            </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Hashes
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Hash</h5>
+                <p class="description">
+                    {{block.hash}}
+                </p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Previous Block</h5>
+                <p class="description">
+                    {{block.prev_block}}
+                </p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Merkle Root</h5>
+                <p class="description">
+                    {{block.mrkl_root}}
+                </p>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+
+<div *ngIf="loading" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Loading blocks
+    </p>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</div>
+
+<div *ngIf="!loading && !block" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Block not found
+    </p>
+</div>

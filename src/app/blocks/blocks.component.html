@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-icon-button (click)="changeDate(false)" *ngIf="!(loading$ | async)">
+            <mat-icon aria-label="fast rewind">fast_rewind</mat-icon>
+        </button>    
+        <h4>{{date | date}}</h4>
+        <button mat-icon-button (click)="changeDate(true)" *ngIf="!(loading$ | async)">
+            <mat-icon aria-label="forward">fast_forward</mat-icon>
+        </button>
+</div>
+
+
+<app-blocks-view [blocks]="blocks$ | async"
+                 [loading]="loading$ | async"
+                 count="10"
+                 (selectBlock)="selectBlock($event)">
+
+</app-blocks-view>

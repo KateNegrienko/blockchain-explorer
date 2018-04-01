@@ -1,0 +1,33 @@
+<form class="search-form">
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-input-container fxFlex>
+            <input matInput placeholder="Transaction hash or block height" required type="text" id="search" name="search" [(ngModel)]="search"
+                #_name="ngModel" />
+        </mat-input-container>
+        <button mat-button color="accent" class="button" (click)="find()" [disabled]="loading$ | async">
+            Search
+        </button>
+
+    </div>
+
+</form>
+
+
+<div fxLayout="row" fxLayoutAlign="start center">
+    <h3 fxFlex>Latest blocks</h3>
+    <button mat-button color="accent" class="button" (click)="showBlocks()">See more</button>
+</div>
+<app-blocks-view [blocks]="lastBlocks$ | async" [loading]="loading$ | async" (selectBlock)="selectBlock($event)" countBlocks="10">
+
+</app-blocks-view>
+<h3>Latest transactions</h3>
+<app-transactions-view [transactions]="lastTransactions$ | async" [loading]="loading$ | async" (selectTransaction)="selectTransaction($event)"
+    countTransactions="10">
+
+</app-transactions-view>
+
+<div *ngIf="lineChartData" class="chart">
+    <canvas baseChart width="500" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [colors]="lineChartColors" chartType="line" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+</div>

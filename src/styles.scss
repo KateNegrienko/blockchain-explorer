@@ -1,0 +1,18 @@
+@import './app/theme.scss';
+
+body {
+    margin: 0;
+}
+
+mat-icon {
+    opacity: .56;
+}
+
+.mat-table {
+    $primary: map-get($pip-blue-theme, primary);
+    background: mat-color($primary, 50);
+}
+
+.ngx-charts {
+    float: none;
+}

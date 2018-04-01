@@ -1,0 +1,17 @@
+<div *ngIf="!(loading$ | async)">
+    <app-block-view [block]="block$ | async"
+                    [loading]="loading$ | async"
+                    [error]="error$ | async"
+    ></app-block-view>
+    <h3>Transactions</h3>
+    <app-transactions-view [transactions]="transactions" [loading]="loading$ | async" (selectTransaction)="selectTransaction($event)">
+    </app-transactions-view>
+</div>
+
+
+<div *ngIf="loading$ | async" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Loading block
+    </p>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</div>

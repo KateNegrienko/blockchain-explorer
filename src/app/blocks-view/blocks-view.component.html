@@ -1,0 +1,42 @@
+<mat-table #table [dataSource]="dataSource" *ngIf="blocks.length > 0 && !loading">
+    <ng-container matColumnDef="height">
+        <mat-header-cell *matHeaderCellDef class="small-row"> HEIGHT</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="small-row"> 
+            <mat-icon aria-label="main chain" *ngIf="!element.main_chain">cross</mat-icon>
+            <span>{{element.height}} </span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="hash">
+        <mat-header-cell *matHeaderCellDef> HASH </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hash}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="time">
+        <mat-header-cell *matHeaderCellDef class="small-row"> TIME </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="small-row"> {{element.time | transformDate : 'dd MMM yyyy HH:mm' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef class="details-row"> </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="details-row">
+            <button mat-icon-button >
+                <mat-icon aria-label="go to details" (click)="gotoBlock(element.hash)">description</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table> 
+
+<div *ngIf="loading" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Loading blocks  
+    </p>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</div>
+
+<div *ngIf="!loading && blocks.length == 0" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Blocks not found
+    </p>
+</div>

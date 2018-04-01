@@ -1,0 +1,119 @@
+<div *ngIf="!(loading$ | async) && (transaction$ | async) && !(error$ | async)">
+
+    <h3 fxFlex>Transaction View</h3>
+    <mat-accordion multi="true">
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{(transaction$ | async).hash }}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <div fxFlex>
+                    <p class="description" *ngFor="let input of (transaction$ | async).inputs">
+                        <span *ngIf="input.prev_out && input.prev_out.addr">
+                            {{input.prev_out.addr}} (
+                            <span class="money">{{input.prev_out.value / 100000000}} BTC</span>)
+                        </span>
+                        <span *ngIf="!input.prev_out">
+                            No Inputs (Newly Generated Coins)
+                        </span>
+                    </p>
+                </div>
+
+                <mat-icon aria-label="to" class="icon">arrow_forward</mat-icon>
+
+                <div fxFlex>
+                    <p class="description" *ngFor="let outItem of (transaction$ | async).out">
+                        {{outItem.addr}} (
+                        <span class="money">{{outItem.value / 100000000}} BTC</span>)
+                        <span *ngIf="outItem.spent"> - Spent</span>
+                        <span *ngIf="!outItem.spent"> - Unspent</span>
+                    </p>
+                </div>
+            </div>
+
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenStateSummary = true" (closed)="panelOpenStateSummary = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Summary
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Size</h5>
+                <p class="description">
+                    {{(transaction$ | async).size }}
+                </p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Weight</h5>
+                <p class="description">
+                    {{(transaction$ | async).weight }}
+                </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <h5 class="title">Included In Blocks</h5>
+                <p class="description">
+                    {{(transaction$ | async).block_height}}
+                </p>
+            </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel (opened)="panelOpenStateInput = true" (closed)="panelOpenStateInput = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Input Scpits
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <p class="description" *ngFor="let inputItem of (transaction$ | async).inputs">
+                {{inputItem.script}}
+            </p>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenStateInput = true" (closed)="panelOpenStateInput = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Outputs Scpits
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <p class="description" *ngFor="let outItem of (transaction$ | async).out">
+                {{outItem.script}}
+            </p>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+
+<div *ngIf="(loading$ | async)" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Loading transaction
+    </p>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</div>
+
+<div *ngIf="(error$ | async)" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Transaction not found: {{(error$ | async)}}
+    </p>
+</div>
+
+
+<div *ngIf="!(loading$ | async) && !(transaction$ | async) && !(error$ | async)" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Transaction not found
+    </p>
+</div>

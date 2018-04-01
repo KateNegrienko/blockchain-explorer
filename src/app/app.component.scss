@@ -1,0 +1,39 @@
+@import './theme.scss';
+
+:host {
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+$padding: 16px;
+.container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    overflow: hidden
+}
+
+.minnor-toolbar {
+    height: 68px;
+}
+mat-toolbar {
+    position: fixed;
+}
+
+.content {
+    height: calc(100% - 68px - 32px);
+    overflow-y: auto;
+    overflow-x: hidden; 
+    padding: $padding;
+    .section {
+        margin: 0 auto;
+        width: 1024px;
+    }
+
+    @media (max-width: 1024px) {
+        .section {
+            width: 100%;
+        }
+    }
+}

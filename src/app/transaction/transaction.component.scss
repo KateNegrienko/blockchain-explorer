@@ -1,0 +1,26 @@
+@import '../theme.scss';
+
+$accent: map-get($pip-blue-theme, accent);
+mat-panel-title {
+    word-break: break-all;
+}
+
+.description {
+    opacity: .56;
+    word-break: break-all;
+}
+
+.title {
+    margin: 14px;
+    margin-left: 0px;
+    width: 150px;
+}
+
+.money {
+    color: mat-color($accent, A700);
+}
+
+.icon {
+    margin: 16px;
+    color: mat-color($accent, A700);
+}

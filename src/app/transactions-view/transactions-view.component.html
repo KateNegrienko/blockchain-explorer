@@ -1,0 +1,31 @@
+<mat-table #table [dataSource]="dataSource" *ngIf="dataSource && !loading">
+
+    <ng-container matColumnDef="hash">
+        <mat-header-cell *matHeaderCellDef> HASH </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hash}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="out">
+            <mat-header-cell *matHeaderCellDef class="small-row"> OUTPUTS
+                </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="small-row"> {{ transactionSum(element.out)}} BTC </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef class="details-row"> </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="details-row">
+            <button mat-icon-button >
+                <mat-icon aria-label="go to details" (click)="gotoTransaction(element.hash)">description</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table> 
+
+<div *ngIf="loading"  fxLayout="column" fxLayoutAlign="center center">
+        <p>
+            Loading transactions
+        </p>
+        <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</div>

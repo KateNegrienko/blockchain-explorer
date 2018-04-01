@@ -1,0 +1,21 @@
+mat-cell, mat-header-cell  {
+    padding: 4px;
+}
+mat-row, mat-header-row {
+    padding: 0 12px;
+    padding-right: 4px;
+}
+
+.small-row {
+    width: 20%;
+    flex: inherit;
+}
+
+.details-row {
+    width: 40px;
+    flex: inherit;
+}
+
+.progress {
+    width: 250px;
+}
