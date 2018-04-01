@@ -8,7 +8,7 @@ mat-icon {
     opacity: .56;
 }
 
-.mat-table {
+.mat-table, .mat-paginator {
     $primary: map-get($pip-blue-theme, primary);
     background: mat-color($primary, 50);
 }

@@ -8,9 +8,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TransactionsViewComponent } from './transactions-view.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatPaginator } from '@angular/material';
 import { MatButtonModule, MatTableModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatProgressBarModule } from '@angular/material';
     MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     TransactionsViewComponent

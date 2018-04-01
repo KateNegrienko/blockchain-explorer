@@ -1,31 +1,41 @@
-<mat-table #table [dataSource]="dataSource" *ngIf="dataSource && !loading">
+<div *ngIf="dataSource && !loading">
+    <div *ngIf="!countTransactions">
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+        </mat-paginator>
+    </div>
+    <mat-table #table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="hash">
-        <mat-header-cell *matHeaderCellDef> HASH </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.hash}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="out">
+        <ng-container matColumnDef="hash">
+            <mat-header-cell *matHeaderCellDef> HASH </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.hash}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="out">
             <mat-header-cell *matHeaderCellDef class="small-row"> OUTPUTS
-                </mat-header-cell>
+            </mat-header-cell>
             <mat-cell *matCellDef="let element" class="small-row"> {{ transactionSum(element.out)}} BTC </mat-cell>
-    </ng-container>
+        </ng-container>
 
-    <ng-container matColumnDef="details">
-        <mat-header-cell *matHeaderCellDef class="details-row"> </mat-header-cell>
-        <mat-cell *matCellDef="let element" class="details-row">
-            <button mat-icon-button (click)="gotoTransaction(element.hash)">
-                <mat-icon aria-label="go to details" >description</mat-icon>
-            </button>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef class="details-row"> </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="details-row">
+                <button mat-icon-button (click)="gotoTransaction(element.hash)">
+                    <mat-icon aria-label="go to details">description</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table> 
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-<div *ngIf="loading"  fxLayout="column" fxLayoutAlign="center center">
-        <p>
-            Loading transactions
-        </p>
-        <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+    </mat-table>
+
+
+</div>
+
+
+<div *ngIf="loading" fxLayout="column" fxLayoutAlign="center center">
+    <p>
+        Loading transactions
+    </p>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
 </div>

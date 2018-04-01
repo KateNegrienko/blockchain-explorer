@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, AfterViewInit, ViewChild } from '@angular/core';
 import { TransactionData, TransactionOutData } from '../data/transaction.data';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
@@ -8,7 +8,7 @@ import { forEach } from '@angular/router/src/utils/collection';
     templateUrl: 'transactions-view.component.html',
     styleUrls: ['./transactions-view.component.scss']
 })
-export class TransactionsViewComponent implements OnChanges {
+export class TransactionsViewComponent implements OnChanges, AfterViewInit {
 
     @Input() countTransactions: number;
     @Input() loading = false;
@@ -22,7 +22,12 @@ export class TransactionsViewComponent implements OnChanges {
     public dataSource;
 
     public constructor(
-    ) {}
+    ) { }
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    public ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 
     public ngOnChanges(changes) {
         if (changes.transactions && changes.transactions.currentValue !== changes.transactions.perviosValue) {
@@ -37,7 +42,7 @@ export class TransactionsViewComponent implements OnChanges {
     }
 
     public gotoTransaction(hash: string) {
-        this.selectTransaction.emit({hash: hash});
+        this.selectTransaction.emit({ hash: hash });
     }
 
     public transactionSum(out: TransactionOutData[]): number {
